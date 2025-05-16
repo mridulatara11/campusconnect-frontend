@@ -1,6 +1,8 @@
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import '../styles/Register.css';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -31,6 +33,18 @@ function Register() {
   };
 
   return (
+    <div className="register-container">
+    <img 
+  src={require('../assets/logo.png')} 
+  alt="MGIT" 
+  style={{ 
+    width: '160px', 
+    marginBottom: '20px',
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  }} 
+/>
     <form onSubmit={handleRegister} style={{ textAlign: 'center', marginTop: '100px' }}>
       <h2>Register</h2>
       <input name="name" placeholder="Name" onChange={handleChange} required />
@@ -42,7 +56,10 @@ function Register() {
         <option value="admin">Admin</option>
       </select>
       <button type="submit">Register</button>
+      <p>Already registered? <a href="/">Login here</a></p>
+
     </form>
+  </div>
   );
 }
 

@@ -1,6 +1,8 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../styles/Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -25,6 +27,19 @@ function Login() {
   };
 
   return (
+    <div className="login-container">
+    <img 
+  src={require('../assets/logo.png')} 
+  alt="MGIT" 
+  style={{ 
+    width: '160px', 
+    marginBottom: '20px',
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  }} 
+/>
+
     <form onSubmit={handleLogin} style={{ textAlign: 'center', marginTop: '100px' }}>
       <h2>Login</h2>
       <input
@@ -44,7 +59,10 @@ function Login() {
         style={{ display: 'block', margin: '10px auto' }}
       />
       <button type="submit">Login</button>
+      <p>Don't have an account? <a href="/register">Register here</a></p>
+
     </form>
+  </div>
   );
 }
 
