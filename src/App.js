@@ -5,16 +5,31 @@ import Register from './pages/Register';
 import Student from './components/student';
 import ClubHead from './components/clubhead';
 import Admin from './components/admin';
+import Sidebar from './components/Sidebar';
+import ClubPage from './pages/Clubpage';
 
 function App() {
   return (
     <Router>
       <Routes>
+        {/* Public Routes without Sidebar */}
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/student" element={<Student />} />
-        <Route path="/club-head" element={<ClubHead />} />
-        <Route path="/admin" element={<Admin />} />
+
+        {/* Private Routes with Sidebar */}
+        <Route path="*" element={
+          <div style={{ display: 'flex' }}>
+            <Sidebar />
+            <div style={{ marginLeft: '220px', padding: '20px', width: '100%' }}>
+              <Routes>
+                <Route path="/student" element={<Student />} />
+                <Route path="/clubhead" element={<ClubHead />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/club/:id" element={<ClubPage />} />
+              </Routes>
+            </div>
+          </div>
+        } />
       </Routes>
     </Router>
   );
