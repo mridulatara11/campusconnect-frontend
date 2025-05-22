@@ -33,7 +33,10 @@ const ClubHead = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/propose-event', event);
+      await axios.post('http://localhost:5000/api/propose-event', {
+      ...event,
+      proposed_by: localStorage.getItem('email') // 💌 Attach the sender’s email
+    });
       alert('Event proposal submitted!');
       setEvent({ title: '', description: '', date: '', club_name: '' });
       fetchNotifications();

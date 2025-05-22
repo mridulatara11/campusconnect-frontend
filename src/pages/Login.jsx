@@ -19,6 +19,8 @@ function Login() {
       // Save email and user ID (required for role-based features)
       localStorage.setItem('email', email);
       localStorage.setItem('user_id', res.data.user_id);
+      localStorage.setItem('role', res.data.role);
+
 
       // Route based on role
       const role = res.data.role;
