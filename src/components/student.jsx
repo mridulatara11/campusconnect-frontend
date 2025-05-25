@@ -95,6 +95,32 @@ const Student = () => {
           ))}
         </ul>
       )}
+      <button
+  onClick={async () => {
+    try {
+      const encodedEmail = encodeURIComponent(userEmail);
+      await axios.delete(`http://localhost:5000/api/notifications/${encodedEmail}`);
+      setNotifications([]);
+      alert('Notifications cleared!');
+    } catch (err) {
+      console.error('Failed to clear notifications:', err);
+      alert('Could not clear notifications. Try again later.');
+    }
+  }}
+  style={{
+    backgroundColor: '#ff6666',
+    color: 'white',
+    padding: '6px 12px',
+    borderRadius: '5px',
+    border: 'none',
+    marginBottom: '15px',
+    cursor: 'pointer'
+  }}
+>
+  Clear Notifications 🧹
+</button>
+
+
     </div>
   );
 };

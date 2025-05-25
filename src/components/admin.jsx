@@ -4,7 +4,7 @@ import axios from 'axios';
 const Admin = () => {
   const [events, setEvents] = useState([]);
   const [notifications, setNotifications] = useState([]);
-  const email = localStorage.getItem('email');
+  const userEmail = localStorage.getItem('email');
 
   useEffect(() => {
     fetchPendingEvents();
@@ -22,7 +22,7 @@ const Admin = () => {
 
   const fetchNotifications = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/notifications/${email}`);
+      const res = await axios.get(`http://localhost:5000/api/notifications/${userEmail}`);
       setNotifications(res.data);
     } catch (err) {
       console.error('Error fetching notifications:', err);
@@ -105,6 +105,29 @@ const Admin = () => {
             ))}
           </ul>
         )}
+        <button
+  onClick={async () => {
+    try {
+      await axios.delete(`http://localhost:5000/api/notifications/${userEmail}`);
+      setNotifications([]); // clear UI
+      alert('Notifications cleared!');
+    } catch (err) {
+      console.error('Failed to clear notifications:', err);
+    }
+  }}
+  style={{
+    backgroundColor: '#ff6666',
+    color: 'white',
+    padding: '6px 12px',
+    borderRadius: '5px',
+    border: 'none',
+    marginBottom: '15px',
+    cursor: 'pointer'
+  }}
+>
+  Clear Notifications 🧹
+</button>
+
       </div>
     </div>
   );
