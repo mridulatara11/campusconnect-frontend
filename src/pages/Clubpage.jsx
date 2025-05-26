@@ -19,23 +19,40 @@ const ClubPage = () => {
 
   if (!club) return <p>Loading club info...</p>;
 
+  // Safely load logo with fallback
+  let logoSrc;
+  try {
+    logoSrc = require(`../assets/${club.logo_url || 'default.png'}`);
+  } catch {
+    logoSrc = require(`../assets/default.png`);
+  }
+
   return (
-    <div style={{ padding: '20px' }}>
+    <div style={{ padding: '20px', fontFamily: 'Segoe UI' }}>
       <h2>{club.name}</h2>
       <img 
-        src={require(`../assets/${club.logo_url}`)} 
+        src={logoSrc} 
         alt={club.name}
-        style={{ width: '100px', marginBottom: '20px' }}
+        style={{ width: '100px', marginBottom: '20px', borderRadius: '10px' }}
       />
-      <p>{club.description}</p>
+      <p>{club.description || 'No description available for this club.'}</p>
 
-      <h3>📅 Events</h3>
+      <h3 style={{ marginTop: '40px' }}>📅 Events</h3>
       {events.length === 0 ? (
         <p>No events yet.</p>
       ) : (
-        <ul>
+        <ul style={{ listStyle: 'none', padding: 0 }}>
           {events.map(event => (
-            <li key={event.id}>
+            <li
+              key={event.id}
+              style={{
+                border: '1px solid #ccc',
+                borderRadius: '8px',
+                marginBottom: '15px',
+                padding: '10px',
+                background: '#f9f9f9'
+              }}
+            >
               <strong>{event.title}</strong> – {event.date}
               <p>{event.description}</p>
             </li>
