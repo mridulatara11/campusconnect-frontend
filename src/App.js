@@ -7,6 +7,7 @@ import ClubHead from './components/clubhead';
 import Admin from './components/admin';
 import Sidebar from './components/Sidebar';
 import ClubPage from './pages/Clubpage';
+import Board from './pages/Board';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/clubhead" element={<ClubHead />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/club/:id" element={<ClubPage />} />
+                <Route path="/Board" element={<Board />} />
               </Routes>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const ClubHead = () => {
   const [clubs, setClubs] = useState([]);
@@ -156,6 +157,7 @@ const ClubHead = () => {
 >
   Clear Notifications 🧹
 </button>
+<Link to="/board">📢 Announcements & Queries</Link>
 
 
       </div>

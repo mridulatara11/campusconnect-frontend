@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Student = () => {
   const [events, setEvents] = useState([]);
@@ -119,6 +120,7 @@ const Student = () => {
 >
   Clear Notifications 🧹
 </button>
+<Link to="/board">📢 Announcements & Queries</Link>
 
 
     </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Admin = () => {
   const [events, setEvents] = useState([]);
@@ -127,6 +128,7 @@ const Admin = () => {
 >
   Clear Notifications 🧹
 </button>
+<Link to="/board">📢 Announcements & Queries</Link>
 
       </div>
     </div>
