@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import LogoutButton from '../components/Logoutbutton';
+import './Admin.css';
 
 const Admin = () => {
   const [events, setEvents] = useState([]);
@@ -43,94 +45,77 @@ const Admin = () => {
     }
   };
 
+  const handleClearNotifications = async () => {
+    try {
+      await axios.delete(`http://localhost:5000/api/notifications/${userEmail}`);
+      setNotifications([]);
+      alert('Notifications cleared!');
+    } catch (err) {
+      console.error('Failed to clear notifications:', err);
+    }
+  };
+
   return (
-    <div style={{ textAlign: 'center', marginTop: '60px', fontFamily: 'Segoe UI' }}>
-      <h2>Admin Panel 🔐</h2>
+    <div className="admin-container">
+      <img
+        src={require('../assets/logo.png')}
+        alt="MGIT"
+      />
+      <div className="admin-header">
+        <h2 className="admin-title">Admin Panel 🔐</h2>
+        <LogoutButton />
+      </div>
 
-      {/* Pending Events Section */}
-      <h3 style={{ marginTop: '40px' }}>Pending Events</h3>
-      {events.length === 0 ? (
-        <p>No pending events</p>
-      ) : (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-          {events.map((event) => (
-            <li key={event.id} style={{
-              border: '1px solid #ccc',
-              margin: '15px auto',
-              padding: '15px',
-              width: '80%',
-              maxWidth: '400px',
-              borderRadius: '10px',
-              backgroundColor: '#f8f9fa'
-            }}>
-              <h4>{event.title}</h4>
-              <p>{event.description}</p>
-              <p><strong>Date:</strong> {new Date(event.date).toLocaleDateString()}</p>
-              <button
-                onClick={() => handleDecision(event.id, 'approved')}
-                style={{ marginRight: '10px', backgroundColor: '#28a745', color: 'white', padding: '5px 10px', borderRadius: '5px', border: 'none' }}
-              >
-                Approve ✅
-              </button>
-              <button
-                onClick={() => handleDecision(event.id, 'rejected')}
-                style={{ backgroundColor: '#dc3545', color: 'white', padding: '5px 10px', borderRadius: '5px', border: 'none' }}
-              >
-                Reject ❌
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+      <section className="admin-section">
+        <h3>Pending Events</h3>
+        {events.length === 0 ? (
+          <p>No pending events</p>
+        ) : (
+          <ul className="admin-events-list">
+            {events.map((event) => (
+              <li key={event.id} className="event-card">
+                <h4>{event.title}</h4>
+                <p>{event.description}</p>
+                <p><strong>Date:</strong> {new Date(event.date).toLocaleDateString()}</p>
+                <div className="event-buttons">
+                  <button
+                    onClick={() => handleDecision(event.id, 'approved')}
+                    className="approve-btn"
+                  >
+                    Approve ✅
+                  </button>
+                  <button
+                    onClick={() => handleDecision(event.id, 'rejected')}
+                    className="reject-btn"
+                  >
+                    Reject ❌
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
 
-      {/* Notifications Section */}
-      <div style={{ marginTop: '50px' }}>
+      <section className="admin-section">
         <h3>🔔 Notifications</h3>
         {notifications.length === 0 ? (
           <p>No notifications yet</p>
         ) : (
-          <ul style={{ listStyle: 'none', padding: 0 }}>
+          <ul className="notification-list">
             {notifications.map((note) => (
-              <li key={note.id} style={{
-                border: '1px solid #ddd',
-                borderRadius: '8px',
-                padding: '10px',
-                margin: '10px auto',
-                width: '90%',
-                maxWidth: '400px',
-                background: '#f1f1f1'
-              }}>
+              <li key={note.id} className="notification-card">
                 <p>{note.message}</p>
                 <small>{new Date(note.timestamp).toLocaleString()}</small>
               </li>
             ))}
           </ul>
         )}
-        <button
-  onClick={async () => {
-    try {
-      await axios.delete(`http://localhost:5000/api/notifications/${userEmail}`);
-      setNotifications([]); // clear UI
-      alert('Notifications cleared!');
-    } catch (err) {
-      console.error('Failed to clear notifications:', err);
-    }
-  }}
-  style={{
-    backgroundColor: '#ff6666',
-    color: 'white',
-    padding: '6px 12px',
-    borderRadius: '5px',
-    border: 'none',
-    marginBottom: '15px',
-    cursor: 'pointer'
-  }}
->
-  Clear Notifications 🧹
-</button>
-<Link to="/board">📢 Announcements & Queries</Link>
-
-      </div>
+        <button onClick={handleClearNotifications} className="clear-btn">
+          Clear Notifications 🧹
+        </button>
+        <Link to="/board" className="board-link">📢 Announcements & Queries</Link>
+      </section>
     </div>
   );
 };

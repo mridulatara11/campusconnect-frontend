@@ -32,7 +32,7 @@ const Sidebar = () => {
 
   return (
     <div style={{
-      width: '220px',
+      width: '400px',
       height: '100vh',
       backgroundColor: '#f1f1f1',
       padding: '20px',

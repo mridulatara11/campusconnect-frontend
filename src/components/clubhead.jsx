@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import LogoutButton from '../components/Logoutbutton';
 const ClubHead = () => {
   const [clubs, setClubs] = useState([]);
   const [event, setEvent] = useState({
@@ -62,6 +62,7 @@ const ClubHead = () => {
 
   return (
     <div style={{ fontFamily: 'Segoe UI', padding: '20px', textAlign: 'center' }}>
+       <LogoutButton />
       <h2>Propose a New Event 💼</h2>
       <form onSubmit={handleSubmit} style={{ marginTop: '30px' }}>
         <input

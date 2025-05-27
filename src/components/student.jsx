@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import LogoutButton from '../components/Logoutbutton';
 const Student = () => {
   const [events, setEvents] = useState([]);
   const [notifications, setNotifications] = useState([]);
@@ -46,6 +46,7 @@ const Student = () => {
 
   return (
     <div style={{ fontFamily: 'Segoe UI', padding: '20px', textAlign: 'center' }}>
+       <LogoutButton />
       <h2>Welcome, {userEmail} 👩‍🎓</h2>
       <h3>🔔 Notifications</h3>
       {notifications.length === 0 ? (
