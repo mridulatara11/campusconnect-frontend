@@ -27,6 +27,18 @@
 .App-link {
   color: #61dafb;
 }
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f4f7fb;
+}
+
+.main-content {
+  flex: 1;
+  padding: 40px 60px;
+  background-color: #f4f7fb;
+}
 
 @keyframes App-logo-spin {
   from {

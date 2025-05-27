@@ -8,6 +8,7 @@ import Admin from './components/admin';
 import Sidebar from './components/Sidebar';
 import ClubPage from './pages/Clubpage';
 import Board from './pages/Board';
+import './App.css'; // Make sure you add the layout styles here
 
 function App() {
   return (
@@ -19,15 +20,15 @@ function App() {
 
         {/* Private Routes with Sidebar */}
         <Route path="*" element={
-          <div style={{ display: 'flex' }}>
+          <div className="app-layout">
             <Sidebar />
-            <div style={{ marginLeft: '220px', padding: '20px', width: '100%' }}>
+            <div className="main-content">
               <Routes>
                 <Route path="/student" element={<Student />} />
                 <Route path="/clubhead" element={<ClubHead />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/club/:id" element={<ClubPage />} />
-                <Route path="/Board" element={<Board />} />
+                <Route path="/board" element={<Board />} />
               </Routes>
             </div>
           </div>
