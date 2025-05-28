@@ -1,0 +1,92 @@
+.clubhead-container {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 40px 60px;
+  background-color: #f4f7fb;
+  width: 100%;
+}
+
+.clubhead-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.event-form {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.event-form input,
+.event-form textarea,
+.event-form select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.submit-btn {
+  background-color: #0c2d57;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.notification-section {
+  margin-top: 50px;
+}
+
+.notification-list {
+  list-style: none;
+  padding: 0;
+}
+
+.notification-card {
+  background-color: #f1f1f1;
+  border-left: 4px solid #0c2d57;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.clear-btn {
+  background-color: #ff6666;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.board-link {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  color: #0c2d57;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.board-link:hover {
+  text-decoration: underline;
+}
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0c2d57;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
