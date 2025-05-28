@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import LogoutButton from '../components/Logoutbutton';
+import './Student.css';
+
 const Student = () => {
   const [events, setEvents] = useState([]);
   const [notifications, setNotifications] = useState([]);
@@ -44,61 +46,7 @@ const Student = () => {
     }
   };
 
-  return (
-    <div style={{ fontFamily: 'Segoe UI', padding: '20px', textAlign: 'center' }}>
-       <LogoutButton />
-      <h2>Welcome, {userEmail} 👩‍🎓</h2>
-      <h3>🔔 Notifications</h3>
-      {notifications.length === 0 ? (
-        <p>No notifications</p>
-      ) : (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-          {notifications
-  .filter((note) => note.message.startsWith('New event'))
-  .map((note) => (
-
-            <li key={note.id} style={{
-              border: '1px solid #ddd',
-              borderRadius: '8px',
-              padding: '10px',
-              margin: '10px auto',
-              width: '90%',
-              maxWidth: '400px',
-              background: '#f9f9f9'
-            }}>
-              <p>{note.message}</p>
-              <small>{new Date(note.timestamp).toLocaleString()}</small>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      <h3 style={{ marginTop: '40px' }}>📅 Upcoming Events</h3>
-      {events.length === 0 ? (
-        <p>No approved events available</p>
-      ) : (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-          {events.map((event) => (
-            <li key={event.id} style={{
-              border: '1px solid #ccc',
-              margin: '15px auto',
-              padding: '15px',
-              width: '80%',
-              maxWidth: '400px',
-              borderRadius: '10px'
-            }}>
-              <h3>{event.title}</h3>
-              <p>{event.description}</p>
-              <p><strong>Date:</strong> {event.date}</p>
-              <button onClick={() => handleRegister(event.id)} style={{ padding: '8px 20px' }}>
-                Register
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-      <button
-  onClick={async () => {
+  const handleClearNotifications = async () => {
     try {
       const encodedEmail = encodeURIComponent(userEmail);
       await axios.delete(`http://localhost:5000/api/notifications/${encodedEmail}`);
@@ -108,22 +56,64 @@ const Student = () => {
       console.error('Failed to clear notifications:', err);
       alert('Could not clear notifications. Try again later.');
     }
-  }}
-  style={{
-    backgroundColor: '#ff6666',
-    color: 'white',
-    padding: '6px 12px',
-    borderRadius: '5px',
-    border: 'none',
-    marginBottom: '15px',
-    cursor: 'pointer'
-  }}
->
-  Clear Notifications 🧹
-</button>
-<Link to="/board">📢 Announcements & Queries</Link>
+  };
 
+  return (
+    <div className="student-container">
+      <img
+        src={require('../assets/logo.png')}
+        alt="MGIT"
+        style={{
+          width: '160px',
+          marginBottom: '20px',
+          display: 'block',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      />
+      <div className="student-header">
+        <h2 className="student-title">Welcome, {userEmail} 👩‍🎓</h2>
+        <LogoutButton />
+      </div>
 
+      <section className="student-section">
+        <h3 className="section-title">📅 Upcoming Events</h3>
+        {events.length === 0 ? (
+          <p>No approved events available</p>
+        ) : (
+          <ul className="event-list">
+            {events.map(event => (
+              <li key={event.id} className="event-card">
+                <h4>{event.title}</h4>
+                <p>{event.description}</p>
+                <p><strong>Date:</strong> {event.date}</p>
+                <button onClick={() => handleRegister(event.id)} className="register-btn">
+                  Register
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+      <section className="student-section">
+        <h3 className="section-title">🔔 Notifications</h3>
+        {notifications.length === 0 ? (
+          <p>No notifications</p>
+        ) : (
+          <ul className="notification-list">
+            {notifications.filter(note => note.message.startsWith('New event')).map(note => (
+              <li key={note.id} className="notification-card">
+                <p>{note.message}</p>
+                <small>{new Date(note.timestamp).toLocaleString()}</small>
+              </li>
+            ))}
+          </ul>
+        )}
+        <button onClick={handleClearNotifications} className="clear-btn">
+          Clear Notifications 🧹
+        </button>
+        <Link to="/board" className="board-link">📢 Announcements & Queries</Link>
+      </section>
     </div>
   );
 };
