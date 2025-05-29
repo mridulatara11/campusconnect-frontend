@@ -15,14 +15,37 @@ const Student = () => {
   }, []);
 
   const fetchEvents = async () => {
-    try {
-      const res = await axios.get('http://localhost:5000/api/events');
-      const approvedEvents = res.data.filter(event => event.status === 'approved');
-      setEvents(approvedEvents);
-    } catch (err) {
-      console.error('Failed to fetch events:', err);
-    }
-  };
+  try {
+    const res = await axios.get('http://localhost:5000/api/events');
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const upcomingEvents = res.data
+      .filter(event => {
+        const eventDate = new Date(event.date);
+        eventDate.setHours(0, 0, 0, 0);
+        return event.status === 'approved' && eventDate > today;
+      })
+      .map(event => {
+        const eventDate = new Date(event.date);
+        eventDate.setHours(0, 0, 0, 0);
+
+        return {
+          ...event,
+          isLastDay: eventDate.getTime() === tomorrow.getTime()
+        };
+      });
+
+    setEvents(upcomingEvents);
+  } catch (err) {
+    console.error('Failed to fetch events:', err);
+  }
+};
+
 
   const fetchNotifications = async () => {
     try {
@@ -83,15 +106,19 @@ const Student = () => {
         ) : (
           <ul className="event-list">
             {events.map(event => (
-              <li key={event.id} className="event-card">
-                <h4>{event.title}</h4>
-                <p>{event.description}</p>
-                <p><strong>Date:</strong> {event.date}</p>
-                <button onClick={() => handleRegister(event.id)} className="register-btn">
-                  Register
-                </button>
-              </li>
-            ))}
+              <li key={event.id} className="event-card" style={{ backgroundColor: event.isLastDay ? '#f36151' : '' }}>
+              <h4>{event.title}</h4>
+              <p>{event.description}</p>
+              <p><strong>Date:</strong> {new Date(event.date).toLocaleDateString()}</p>
+              {event.isLastDay && (
+              <p style={{ fontWeight: 'bold', color: '#090909' }}>⏳ Last day for Registration</p>
+          )}
+            <button onClick={() => handleRegister(event.id)} className="register-btn">
+            Register
+          </button>
+          </li>
+
+          ))}
           </ul>
         )}
       </section>
