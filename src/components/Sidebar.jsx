@@ -32,14 +32,18 @@ const Sidebar = () => {
 
   return (
     <div style={{
-      width: '300px',
+      width: '220px',
       height: '100vh',
+      position: 'fixed',
+      top: 0,
+      left: 0,
       backgroundColor: '#f1f1f1',
       padding: '20px',
       overflowY: 'auto',
-      boxShadow: '2px 0 5px rgba(0,0,0,0.1)'
+      boxShadow: '2px 0 5px rgba(0,0,0,0.1)',
+      zIndex: 1000
     }}>
-      <h3 style={{ marginBottom: '20px' }}>Clubs</h3>
+      <h3 style={{ marginBottom: '20px', fontFamily: 'Segoe UI', color: '#0c2d57' }}>Clubs</h3>
 
       <Link
         to={getDashboardRoute()}
@@ -48,7 +52,8 @@ const Sidebar = () => {
           margin: '10px 0 20px 0',
           fontWeight: 'bold',
           color: '#333',
-          textDecoration: 'none'
+          textDecoration: 'none',
+          fontFamily: 'Segoe UI'
         }}
       >
         ← Back to Dashboard
@@ -64,9 +69,10 @@ const Sidebar = () => {
             display: 'flex',
             alignItems: 'center',
             marginBottom: '15px',
-            padding: '5px',
+            padding: '6px 10px',
             borderRadius: '5px',
             transition: 'background 0.2s',
+            fontFamily: 'Segoe UI'
           }}
           onMouseEnter={e => e.currentTarget.style.backgroundColor = '#e0e0e0'}
           onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}

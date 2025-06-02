@@ -27,6 +27,8 @@
 .App-link {
   color: #61dafb;
 }
+
+/* Layout for pages with Sidebar */
 .app-layout {
   display: flex;
   min-height: 100vh;
@@ -34,12 +36,42 @@
   background-color: #f4f7fb;
 }
 
+/* Fixed width sidebar assumed to be 220px or 240px */
 .main-content {
+  margin-left: 240px; /* Match your Sidebar width */
   flex: 1;
   padding: 40px 60px;
   background-color: #f4f7fb;
 }
 
+/* Sidebar styles can optionally be moved here */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  background-color: #f1f1f1;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+/* Sidebar hover effect for links */
+.sidebar a:hover {
+  background-color: #e0e0e0;
+}
+
+/* Sidebar logo images */
+.sidebar img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+/* Optional keyframe for the spinning logo */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
