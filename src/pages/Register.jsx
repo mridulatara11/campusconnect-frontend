@@ -45,20 +45,32 @@ function Register() {
     marginRight: 'auto'
   }} 
 />
-    <form onSubmit={handleRegister} style={{ textAlign: 'center', marginTop: '100px' }}>
-      <h2>Register</h2>
-      <input name="name" placeholder="Name" onChange={handleChange} required />
-      <input name="email" placeholder="Email" type="email" onChange={handleChange} required />
-      <input name="password" placeholder="Password" type="password" onChange={handleChange} required />
-      <select name="role" onChange={handleChange}>
-        <option value="student">Student</option>
-        <option value="clubHead">Club Head</option>
-        <option value="admin">Admin</option>
-      </select>
-      <button type="submit">Register</button>
-      <p>Already registered? <a href="/">Login here</a></p>
+<img
+        src={require('../assets/mgit.png')}
+        alt="MGIT"
+        style={{
+          width: '180px',
+          marginBottom: '30px',
+          display: 'block',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      />
 
-    </form>
+   <form onSubmit={handleRegister} className="register-form">
+  <h2>Register</h2>
+  <input name="name" placeholder="Name" onChange={handleChange} required />
+  <input name="email" placeholder="Email" type="email" onChange={handleChange} required />
+  <input name="password" placeholder="Password" type="password" onChange={handleChange} required />
+  <select name="role" onChange={handleChange}>
+    <option value="student">Student</option>
+    <option value="clubHead">Club Head</option>
+    <option value="admin">Admin</option>
+  </select>
+  <button type="submit">Register</button>
+  <p>Already registered? <a href="/">Login here</a></p>
+</form>
+
   </div>
   );
 }

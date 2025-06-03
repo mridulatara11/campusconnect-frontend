@@ -81,7 +81,7 @@ const Sidebar = () => {
             src={getLogoSrc(club.logo_url)}
             alt={club.name}
             style={{
-              width: '30px',
+              width: '50px',
               height: '30px',
               marginRight: '10px',
               borderRadius: '50%',

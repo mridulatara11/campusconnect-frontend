@@ -15,14 +15,9 @@ function Login() {
         email,
         password,
       });
-
-      // Save email and user ID (required for role-based features)
       localStorage.setItem('email', email);
       localStorage.setItem('user_id', res.data.user_id);
       localStorage.setItem('role', res.data.role);
-
-
-      // Route based on role
       const role = res.data.role;
       if (role === 'student') navigate('/student');
       else if (role === 'clubHead') navigate('/clubhead');
@@ -35,20 +30,31 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
+    <div className="login-container" style={{ textAlign: 'center', paddingTop: '30px' }}>
       <img
         src={require('../assets/logo.png')}
         alt="MGIT"
         style={{
           width: '160px',
-          marginBottom: '20px',
+          marginBottom: '10px',
+          display: 'block',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      />
+      <img
+        src={require('../assets/mgit.png')}
+        alt="MGIT"
+        style={{
+          width: '180px',
+          marginBottom: '30px',
           display: 'block',
           marginLeft: 'auto',
           marginRight: 'auto',
         }}
       />
 
-      <form onSubmit={handleLogin} style={{ textAlign: 'center', marginTop: '100px' }}>
+      <form onSubmit={handleLogin} style={{ textAlign: 'center', marginTop: '10px' }}>
         <h2>Login</h2>
         <input
           type="email"
